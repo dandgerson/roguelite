@@ -38,8 +38,8 @@ const phaserConfig = {
     },
 
     create() {
-      const dungeon = new Dungeon({ level })
-      dungeon.initialize({ scene: this })
+      const dungeon = new Dungeon()
+      dungeon.initialize({ scene: this, level })
 
       const player = new Player({
         x: 15,
@@ -52,7 +52,6 @@ const phaserConfig = {
 
     update() {
       if (turnManager.isOver()) {
-        console.log('turn is over')
         turnManager.refresh()
       }
 

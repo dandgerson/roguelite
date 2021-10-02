@@ -1,12 +1,6 @@
 import level from 'level'
 
 class Dungeon {
-  constructor({ level }) {
-    Object.assign(this, {
-      level,
-    })
-  }
-
   #tileSize = 16
   sprites = {
     floor: 0,
@@ -22,8 +16,11 @@ class Dungeon {
     'I': this.sprites.pillar,
   }
 
-  initialize({ scene }) {
-    const map = scene.make.tilemap({
+  initialize({ scene, level }) {
+    this.scene = scene
+    this.level = level
+
+    const map = this.scene.make.tilemap({
       data: this.getRemappedTiles(),
       tileWidth: this.#tileSize,
       tileHeight: this.#tileSize,
