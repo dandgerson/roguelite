@@ -10,6 +10,7 @@ class Dungeon {
   #tileSize = 16
   sprites = {
     floor: 0,
+    mud: 3,
     wall: 554,
     skeleton: 221,
     pillar: 424,

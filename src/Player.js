@@ -52,8 +52,16 @@ class Player {
 
     const tileAtDestination = this.dungeon.map.getTileAt(this.x, this.y)
     if (tileAtDestination.index === this.dungeon.sprites.wall) {
-      this.x = oldX
-      this.y = oldY
+      if (this.movementsPoints > 0) {
+        this.dungeon.map.putTileAt(this.sprite, this.x, this.y)
+        this.dungeon.map.putTileAt(this.dungeon.sprites.mud, oldX, oldY)
+
+        this.movementsPoints -= 1
+      } else {
+        this.x = oldX
+        this.y = oldY
+      }
+
     }
 
     if (this.x !== oldX || this.y !== oldY) {
