@@ -5,11 +5,11 @@ import 'styles/main.scss'
 
 import level from "level"
 
-import Dungeon from 'Dungeon'
-import TurnManager from 'TurnManager'
+import DungeonSingleton from 'Dungeon'
+import TurnManagerSingleton from 'TurnManager'
 import Player from 'Player'
 
-const turnManager = new TurnManager()
+const turnManager = new TurnManagerSingleton()
 
 const phaserConfig = {
   type: Phaser.AUTO,
@@ -38,7 +38,7 @@ const phaserConfig = {
     },
 
     create() {
-      const dungeon = new Dungeon()
+      const dungeon = new DungeonSingleton()
       dungeon.initialize({ scene: this, level })
 
       const player = new Player({

@@ -1,4 +1,13 @@
-class TurnManager {
+class TurnManagerSingleton {
+  constructor() {
+    if (TurnManagerSingleton.instance) {
+      console.warn('inappropriate instance of', TurnManagerSingleton.name)
+      return TurnManagerSingleton.instance
+    }
+
+    TurnManagerSingleton.instance = this
+  }
+
   #lastCall = Date.now()
   #interval = 150
   #entities = new Set()
@@ -36,4 +45,4 @@ class TurnManager {
   }
 }
 
-export default TurnManager
+export default TurnManagerSingleton

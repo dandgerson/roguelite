@@ -1,6 +1,15 @@
 import level from 'level'
 
-class Dungeon {
+class DungeonSingleton {
+  constructor() {
+    if (DungeonSingleton.instance) {
+      console.warn('inappropriate instance of', DungeonSingleton.name)
+      return DungeonSingleton.instance
+    }
+
+    DungeonSingleton.instance = this
+  }
+
   #tileSize = 16
   sprites = {
     floor: 0,
@@ -45,4 +54,4 @@ class Dungeon {
   }
 }
 
-export default Dungeon
+export default DungeonSingleton
