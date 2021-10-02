@@ -52,6 +52,7 @@ const phaserConfig = {
 
     update() {
       if (turnManager.isOver()) {
+        console.log('turn is over')
         turnManager.refresh()
       }
 
