@@ -30,7 +30,7 @@ class DungeonSingleton {
     this.level = level
 
     const map = this.scene.make.tilemap({
-      data: this.getRemappedTiles(),
+      data: this.getMappedTiles(),
       tileWidth: this.#tileSize,
       tileHeight: this.#tileSize,
     })
@@ -47,10 +47,38 @@ class DungeonSingleton {
     this.map = map.createLayer(0, tileset, 0, 0)
   }
 
-  getRemappedTiles() {
+  getMappedTiles() {
     return this.level
       .map(row => row
         .map(tile => this.#spritesMap[tile]))
+  }
+
+  initializeEntity(entity) {
+    const x = this.map.tileToWorldX(entity.x)
+    const y = this.map.tileToWorldY(entity.y)
+    entity.sprite = this.scene.add.sprite(x, y, 'tiles', entity.tile)
+    entity.sprite.setOrigin(0)
+  }
+
+  moveEntityTo(entity, x, y) {
+    entity.moving = true
+
+    this.scene.tweens.add({
+      targets: entity.sprite,
+      onComplete: () => {
+        entity.moving = false
+        entity.x = x
+        entity.y = y
+      },
+      x: this.map.tileToWorldX(x),
+      y: this.map.tileToWorldY(y),
+      ease: 'Power2',
+      duration: 200,
+    })
+  }
+
+  isWalkableTile(x, y) {
+    return this.level[y][x] !== 1
   }
 }
 
